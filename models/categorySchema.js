@@ -1,4 +1,4 @@
-const mongoose = require('./connection')
+const mongoose = require('../database/connection')
 
 const CategorySchema = mongoose.Schema({
 
@@ -14,7 +14,7 @@ const CategorySchema = mongoose.Schema({
         required: true
 
     },
-    date:{
+    date: {
 
         type: Date,
         default: Date.now()
