@@ -1,0 +1,28 @@
+<div class="card mt-4">
+    <div class="card-body">
+        <h1 class="display-4">Seja bem-vindo ao Node!</h1>
+        <p class="lead">Este é um site simples, desenvolvido com Node.js, Express e MongoDB</p>
+        <hr class="my-4">
+        <p>Aqui você consegue acompanhar as principais notícias do mundo da computação</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Crie sua conta</a>
+     </div>
+</div>
+
+<hr>
+<H3>Postagens recentes: </H3>
+{{#each postagens}}
+<div class="card mt-4">
+    <div class="card-body">
+        <h4>{{titulo}}</h4>
+        <small>{{descricao}}</small><br>
+        <a href="/postagens/{{_id}}"><button class="btn btn-success mt-3">Ler mais</button></a>
+        <hr>
+        <small>Categoria: {{categoria.name}}</small><br>
+        <small>Data de publicação: {{data}}</small>
+    </div>
+</div>
+{{else}}
+<hr class="mt-3">
+<h4 class="text-secondary text-center">Nenhuma postagem registrada</h4>
+{{/each}}

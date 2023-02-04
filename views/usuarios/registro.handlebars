@@ -1,0 +1,43 @@
+{{#each erro}}
+
+    <div class="alert alert-danger">{{text}}</div>
+
+{{else}}
+
+{{/each}}
+
+<div class="card">
+    <div class="card-body">
+        <h2>Registre-se</h2>
+        <form action="/usuarios/registro" method="post">
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating mt-3">
+                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{name}}" required>
+                        <label for="nome">Nome</label>
+                    </div>   
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mt-3">
+                        <input type="email" class="form-control" name="email" placeholder="name@example.com" value="{{email}}" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mt-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    <label for="password">Senha</label>
+            </div>
+            <div class="form-floating mt-3">
+                    <input type="password" class="form-control" name="password2" placeholder="Password2" required>
+                    <label for="password2">Digite novamente sua senha</label>
+            </div>
+            <div class="d-grid gap-2 col-2 mx-auto mt-3">
+                <button class="btn btn-success" type="submit">Registrar</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+

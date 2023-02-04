@@ -1,0 +1,10 @@
+<h1>Categorias: </h1>
+{{#each categorias}}
+    <div class="list-group">
+        <a href="/categorias/{{_id}}/{{name}}" class="list-group-item list-group-item-action">{{name}}</a>
+    </div>
+{{else}}
+    <div class="list-group">
+        <a href="/categorias" class="list-group-item list-group-item-action">Nenhuma categoria cadastrada!</a>
+    </div>
+{{/each}}

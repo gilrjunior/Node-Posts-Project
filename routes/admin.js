@@ -36,6 +36,12 @@ router.get('/categorias', (req, res) => {
 
 })
 
+router.get('/categorias/add', (req, res) => {
+
+    res.render('admin/addcategorias')
+
+})
+
 router.post('/categorias/nova', (req, res) => {
 
     var erros = []
@@ -174,12 +180,6 @@ router.post("/categorias/edit", (req, res) => {
 
 })
 
-router.get('/categorias/add', (req, res) => {
-
-    res.render('admin/addcategorias')
-
-})
-
 
 router.post("/categorias/deletar", (req, res) => {
 
@@ -266,6 +266,93 @@ router.post("/postagens/nova", (req, res) => {
 
 
     }
+
+})
+
+router.get("/postagens/edit/:id", (req, res) => {
+
+    post.findOne({_id: req.params.id}).populate({path: 'categoria', strictPopulate: false}).then((postagem) => {
+
+        category.find().then((categorias) => {
+
+            res.render("admin/editpostagens", {postagem: postagem, categorias: categorias})    
+
+        }).catch((err) => {
+
+            req.flash("error_msg", "Ocorreu um erro ao buscar as categorias!")
+            res.redirect("/admin/postagens")
+    
+        })
+
+
+    }).catch((err) => {
+
+        req.flash("error_msg", "Ocorreu um erro ao buscar por esta postagem!")
+        res.redirect("/admin/postagens")
+
+    })
+
+
+})
+
+router.post("/postagens/edit", (req, res) => {
+
+    if(req.body.categoria == "1"){
+        req.flash("error_msg", "Para realizar uma postagem você deve selecionar uma categoria!")
+        res.redirect("/admin/postagens/add")
+    }else if(req.body.categoria == "0"){
+        req.flash("error_msg", "Categoria Inválida, registre uma categoria para realizar uma postagem!")
+        res.redirect("/admin/postagens/add")
+    }else{
+
+        post.findOne({_id: req.body.id}).then((postagem) => {
+
+            postagem.titulo = req.body.titulo
+            postagem.titulo = req.body.titulo,
+            postagem.slug = req.body.slug,
+            postagem.descricao = req.body.descricao,
+            postagem.conteudo = req.body.conteudo,
+            postagem.categoria = req.body.categoria
+
+            
+            postagem.save().then(() => {
+
+                req.flash("success_msg", "Postagem atualizada com sucesso!")
+                res.redirect("/admin/postagens")
+
+            }).catch((err) => {
+
+                req.flash("error_msg", "Ocorreu um erro ao tentar editar a postagem!")
+                res.redirect("/admin/postagens")
+    
+            })
+
+        }).catch((err) => {
+
+            req.flash("error_msg", "Ocorreu um erro ao tentar editar a postagem!")
+            res.redirect("/admin/postagens")
+
+        })
+
+    }
+
+})
+
+router.post("/postagens/deletar", (req, res)=> { 
+
+    post.deleteOne({_id: req.body.id}).then(()=>{
+
+        req.flash("success_msg", "Postagem deletada com sucesso!")
+        res.redirect("/admin/postagens")
+
+    }).catch((err) => {
+
+        req.flash("error_msg", "Ocorreu um erro ao tentar delatar a postagem!")
+        res.redirect("/admin/postagens")
+
+    })
+
+
 
 })
 
