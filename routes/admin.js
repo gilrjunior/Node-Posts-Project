@@ -5,22 +5,25 @@ const router = express.Router()
 //const bodyParser = require('body-parser')
 const category = require('../models/categorySchema')
 const post = require('../models/postSchema')
+const {Adm} = require("../helpers/adm")
+
+
 
 //ROUTES ADM
 
-router.get('/', (req, res) => {
+router.get('/',Adm, (req, res) => {
 
     res.render('admin/index')
 
 })
 
-router.get('/posts', (req, res) => {
+router.get('/posts',Adm, (req, res) => {
 
     res.send('Página de Post')
 
 })
 
-router.get('/categorias', (req, res) => {
+router.get('/categorias',Adm, (req, res) => {
 
     category.find().sort({ date: "desc" }).then((categories) => {
 
@@ -36,13 +39,13 @@ router.get('/categorias', (req, res) => {
 
 })
 
-router.get('/categorias/add', (req, res) => {
+router.get('/categorias/add',Adm, (req, res) => {
 
     res.render('admin/addcategorias')
 
 })
 
-router.post('/categorias/nova', (req, res) => {
+router.post('/categorias/nova',Adm, (req, res) => {
 
     var erros = []
 
@@ -101,7 +104,7 @@ router.post('/categorias/nova', (req, res) => {
 
 })
 
-router.get("/categorias/edit/:id", (req, res) => {
+router.get("/categorias/edit/:id",Adm, (req, res) => {
 
     category.findOne({ _id: req.params.id }).then((categoria) => {
 
@@ -116,7 +119,7 @@ router.get("/categorias/edit/:id", (req, res) => {
 
 })
 
-router.post("/categorias/edit", (req, res) => {
+router.post("/categorias/edit",Adm, (req, res) => {
 
     category.findOne({ _id: req.body.id }).then((categoria) => {
 
@@ -181,7 +184,7 @@ router.post("/categorias/edit", (req, res) => {
 })
 
 
-router.post("/categorias/deletar", (req, res) => {
+router.post("/categorias/deletar",Adm, (req, res) => {
 
     category.deleteOne({ _id: req.body.id }).then(() => {
 
@@ -199,7 +202,7 @@ router.post("/categorias/deletar", (req, res) => {
 
 })
 
-router.get("/postagens", (req, res) => {
+router.get("/postagens",Adm, (req, res) => {
 
     post.find().populate({path: 'categoria', strictPopulate: false}).sort({data: "desc"}).then((postagens) => {
 
@@ -216,7 +219,7 @@ router.get("/postagens", (req, res) => {
 
 })
 
-router.get("/postagens/add", (req, res) => {
+router.get("/postagens/add",Adm, (req, res) => {
 
     category.find().then((categorias) => {
 
@@ -231,7 +234,7 @@ router.get("/postagens/add", (req, res) => {
 
 })
 
-router.post("/postagens/nova", (req, res) => {
+router.post("/postagens/nova",Adm, (req, res) => {
 
     if(req.body.categoria == "1"){
         req.flash("error_msg", "Para realizar uma postagem você deve selecionar uma categoria!")
@@ -269,7 +272,7 @@ router.post("/postagens/nova", (req, res) => {
 
 })
 
-router.get("/postagens/edit/:id", (req, res) => {
+router.get("/postagens/edit/:id",Adm, (req, res) => {
 
     post.findOne({_id: req.params.id}).populate({path: 'categoria', strictPopulate: false}).then((postagem) => {
 
@@ -295,7 +298,7 @@ router.get("/postagens/edit/:id", (req, res) => {
 
 })
 
-router.post("/postagens/edit", (req, res) => {
+router.post("/postagens/edit",Adm, (req, res) => {
 
     if(req.body.categoria == "1"){
         req.flash("error_msg", "Para realizar uma postagem você deve selecionar uma categoria!")
@@ -338,7 +341,7 @@ router.post("/postagens/edit", (req, res) => {
 
 })
 
-router.post("/postagens/deletar", (req, res)=> { 
+router.post("/postagens/deletar",Adm, (req, res)=> { 
 
     post.deleteOne({_id: req.body.id}).then(()=>{
 

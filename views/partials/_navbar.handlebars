@@ -13,13 +13,39 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/categorias">Lista Categorias</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/usuarios/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/usuarios/registro">Registro</a>
-                </li>
+
+                {{#if user}}
+
+                {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios/registro">Registro</a>
+                    </li>
+                {{/if}}
+
+                {{#if adm}}
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+
+                {{else}}  
+
+                {{/if}}
+
             </ul>
+
+                {{#if user}}
+
+                    <form class="d-flex" action="/usuarios/logout" method="get">
+                        <button class="btn btn-outline-danger" type="submit">Sair</button>
+                    </form>
+
+                {{else}} 
+
+                {{/if}}
         </div>
     </div>
 </nav>

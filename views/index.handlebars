@@ -1,13 +1,17 @@
-<div class="card mt-4">
-    <div class="card-body">
-        <h1 class="display-4">Seja bem-vindo ao Node!</h1>
-        <p class="lead">Este é um site simples, desenvolvido com Node.js, Express e MongoDB</p>
-        <hr class="my-4">
-        <p>Aqui você consegue acompanhar as principais notícias do mundo da computação</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Crie sua conta</a>
-     </div>
-</div>
+{{#if user}}
+
+{{else}}
+    <div class="card mt-4">
+        <div class="card-body">
+                <h1 class="display-4">Seja bem-vindo ao Node!</h1>
+                <p class="lead">Este é um site simples, desenvolvido com Node.js, Express e MongoDB</p>
+                <hr class="my-4">
+                <p>Aqui você consegue acompanhar as principais notícias do mundo da computação</p>
+                <p class="lead">
+                <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Crie sua conta</a>
+        </div>
+    </div>
+{{/if}}
 
 <hr>
 <H3>Postagens recentes: </H3>

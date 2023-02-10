@@ -9,5 +9,24 @@
     "mongoose": "^6.8.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
-  }
+  },
+  "name": "projetoapp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilrjunior/ProjetoNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilrjunior/ProjetoNode/issues"
+  },
+  "homepage": "https://github.com/gilrjunior/ProjetoNode#readme",
+  "description": ""
 }
